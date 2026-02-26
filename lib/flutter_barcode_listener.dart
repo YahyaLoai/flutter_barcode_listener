@@ -1,4 +1,5 @@
 library flutter_barcode_listener;
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -24,8 +25,7 @@ class BarcodeKeyboardListener extends StatefulWidget {
       _BarcodeKeyboardListenerState();
 }
 
-class _BarcodeKeyboardListenerState
-    extends State<BarcodeKeyboardListener> {
+class _BarcodeKeyboardListenerState extends State<BarcodeKeyboardListener> {
   final List<String> _buffer = [];
   DateTime? _lastEventTime;
 
@@ -36,10 +36,7 @@ class _BarcodeKeyboardListenerState
   }
 
   bool _handleKeyEvent(KeyEvent event) {
-   // if (event is !KeyDownEvent) return false;
-
-    final character = event.character;
-    if (character == null) return false;
+    if (event is! KeyDownEvent) return false;
 
     final now = DateTime.now();
 
@@ -57,7 +54,9 @@ class _BarcodeKeyboardListenerState
         _buffer.clear();
       }
     } else {
-      _buffer.add(character);
+      if (event.character != null && event.character!.isNotEmpty) {
+        _buffer.add(event.character!);
+      }
     }
 
     return false;
