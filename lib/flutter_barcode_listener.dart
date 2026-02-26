@@ -36,7 +36,7 @@ class _BarcodeKeyboardListenerState
   }
 
   bool _handleKeyEvent(KeyEvent event) {
-    if (event is !KeyDownEvent) return false;
+   // if (event is !KeyDownEvent) return false;
 
     final character = event.character;
     if (character == null) return false;
